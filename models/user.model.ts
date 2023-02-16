@@ -49,7 +49,7 @@ const userSchema: Schema<UserSchema> = new Schema(
         {
           productID: {
             type: Schema.Types.ObjectId,
-            ref: "product",
+            ref: "Product",
             required: [true, "Please select a product"]
           },
           quantity: {
@@ -70,7 +70,7 @@ const userSchema: Schema<UserSchema> = new Schema(
 
 userSchema.methods.addToCart = function(){}
 
-userSchema.methods.removeFromCart = function(){}
+userSchema.methods.removeFromCart = function(productID){}
 
 userSchema.methods.clearCart = function(){
   this.cart = {items: []}
