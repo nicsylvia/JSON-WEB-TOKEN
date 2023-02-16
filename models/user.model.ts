@@ -3,7 +3,11 @@ import { IUser } from "../interfaces/User";
 import isEmail from "validator/lib/isEmail";
 import { authRole } from "../constants/user.constant";
 
-interface UserSchema extends Document, IUser {}
+interface UserSchema extends Document, IUser {
+  clearCart(): Promise<void>;
+  removeFromCart(productID: string): Promise<void>;
+  addToCart(productID: string, Decrement: boolean): Promise<boolean>
+}
 
 const userSchema: Schema<UserSchema> = new Schema(
   {
@@ -46,6 +50,8 @@ const userSchema: Schema<UserSchema> = new Schema(
     timestamps: true,
   }
 );
+
+// Methods for add to cart
 
 const UserModel = model<UserSchema>("User", userSchema);
 export default UserModel;

@@ -10,5 +10,6 @@ const app: Application = express();
 appConfig(app);
 dbConfig();
 app.listen(port, () => {
+  console.log("")
   console.log(`Server listening on ${port}`);
 });
