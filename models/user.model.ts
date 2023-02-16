@@ -53,5 +53,9 @@ const userSchema: Schema<UserSchema> = new Schema(
 
 // Methods for add to cart
 
+userSchema.methods.addToCart = function(){}
+userSchema.methods.removeFromCart = function(){}
+userSchema.methods.clearCart = function(){}
+
 const UserModel = model<UserSchema>("User", userSchema);
 export default UserModel;
