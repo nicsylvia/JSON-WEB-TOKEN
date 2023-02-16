@@ -73,10 +73,23 @@ userSchema.methods.addToCart = function(productID: string, Decrement: boolean){
   let updateCartItem: ICartItem[] = [];
 
   if (this.cart.items) {
+    // Getting the index position of each product to be added to cart
     cartItemIndex = this.cart.items.findIndex((el: {productID: {toString: ()=> string}}) =>{
       return el.productID.toString() === productID.toString()
     })
+    // Pushing the products into the cart using the spread operator
     updateCartItem = [...this.cart.items]
+  }
+
+  // Checking for the quantity of products that was added to cart
+  let newQuantity = 1
+
+  if (cartItemIndex <= 0) {
+    if (Decrement) {
+      newQuantity = this.cart.items(cartItemIndex)
+    }
+  }else{
+
   }
 }
 
