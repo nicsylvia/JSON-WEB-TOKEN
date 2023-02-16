@@ -1,5 +1,5 @@
 import { Document, model, Schema } from "mongoose";
-import { IUser } from "../interfaces/User";
+import { ICartItem, IUser } from "../interfaces/User";
 import isEmail from "validator/lib/isEmail";
 import { authRole } from "../constants/user.constant";
 
@@ -69,7 +69,15 @@ const userSchema: Schema<UserSchema> = new Schema(
 // Methods for add to cart, remove from cart and clear cart
 
 userSchema.methods.addToCart = function(productID: string, Decrement: boolean){
-  let cartItemIndex = 
+  let cartItemIndex = -1
+  let updateCartItem: ICartItem[] = [];
+
+  if (this.cart.items) {
+    cartItemIndex = this.cart.items.findIndex((el: {productID: {toString: ()=> string}}) =>{
+      return el.productID.toString() === productID.toString()
+    })
+    updateCartItem = [...this.cart.items]
+  }
 }
 
 userSchema.methods.removeFromCart = function(productID : string){
