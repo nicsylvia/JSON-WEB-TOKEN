@@ -70,10 +70,17 @@ const userSchema: Schema<UserSchema> = new Schema(
 
 userSchema.methods.addToCart = function(){}
 
-userSchema.methods.removeFromCart = function(productID){}
+userSchema.methods.removeFromCart = function(productID : string){
+  const updateCart = this.cart.items.filter((item: {productID: {toString: ()=> string}}) =>{
+    return item.productID.toString() !== productID.toString()
+  })
+  this.cart.items = updateCart
+  return this.save({validateBeforeSave: false})
+}
 
 userSchema.methods.clearCart = function(){
   this.cart = {items: []}
+  return this.save();
 }
 
 const UserModel = model<UserSchema>("User", userSchema);
