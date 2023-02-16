@@ -68,7 +68,9 @@ const userSchema: Schema<UserSchema> = new Schema(
 
 // Methods for add to cart, remove from cart and clear cart
 
-userSchema.methods.addToCart = function(){}
+userSchema.methods.addToCart = function(productID: string, Decrement: boolean){
+  let cartItemIndex = 
+}
 
 userSchema.methods.removeFromCart = function(productID : string){
   const updateCart = this.cart.items.filter((item: {productID: {toString: ()=> string}}) =>{
