@@ -44,6 +44,11 @@ const userSchema: Schema<UserSchema> = new Schema(
       default: authRole.user,
       required: true,
     },
+    cart: {
+      items: {
+
+      }
+    }
   },
   {
     versionKey: false,
@@ -51,11 +56,15 @@ const userSchema: Schema<UserSchema> = new Schema(
   }
 );
 
-// Methods for add to cart
+// Methods for add to cart, remove from cart and clear cart
 
 userSchema.methods.addToCart = function(){}
+
 userSchema.methods.removeFromCart = function(){}
-userSchema.methods.clearCart = function(){}
+
+userSchema.methods.clearCart = function(){
+  this.cart = {items: []}
+}
 
 const UserModel = model<UserSchema>("User", userSchema);
 export default UserModel;
