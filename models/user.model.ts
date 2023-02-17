@@ -84,18 +84,28 @@ userSchema.methods.addToCart = function(productID: string, Decrement: boolean){
   // Checking for the quantity of products that was added to cart
   let newQuantity = 1
 
-  if (cartItemIndex <= 0) {
+  if (cartItemIndex >= 0) {
     if (Decrement) {
       newQuantity = this.cart.items[cartItemIndex].quantity - 1
-      if (newQuantity >= 0) {
+      if (newQuantity <= 0) {
         return this.removeFromCart(productID)
       }else{
         newQuantity = this.cart.items[cartItemIndex].quantity + 1
       }
+      updateCartItem[cartItemIndex].quantity = newQuantity
     }
   }else{
-
+    updateCartItem.push({
+      productID: productID,
+      quantity: newQuantity
+    })
   }
+
+  const updatedCart = {
+    items: updateCartItem
+  }
+  this.cart.items = updatedCart
+  return this.save({validateBeforeSave: false})
 }
 
 userSchema.methods.removeFromCart = function(productID : string){
