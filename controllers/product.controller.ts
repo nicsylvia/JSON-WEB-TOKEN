@@ -72,6 +72,15 @@ export const addToCart = asyncHandler(
       )
     };
 
-    const updatedUser = await user!.addToCart
+    const Decrement = req.query.Decrement === "true";
+    const updatedUser = await user!.addToCart(req.body.productID, Decrement);
+
+    const FinalUpdate = {
+      user: updatedUser
+    }
+
+    return res.status(200).json({
+      data: FinalUpdate
+    });
 
 })

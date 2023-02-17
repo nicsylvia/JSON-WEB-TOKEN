@@ -7,6 +7,7 @@ export interface ICartItem{
 }
 
 export interface IUser extends Document {
+  productID: string;
   name: string;
   email: string;
   password: string;
