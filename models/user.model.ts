@@ -120,8 +120,8 @@ userSchema.methods.removeFromCart = function(productID : string){
 // Methods for clear cart
 
 userSchema.methods.clearCart = function(){
-  this.cart.items = items{}
-  this.save()
+  this.cart.items: { items: [] };
+  return this.save()
 }
 
 
