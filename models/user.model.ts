@@ -119,10 +119,7 @@ userSchema.methods.removeFromCart = function(productID : string){
 
 // Methods for clear cart
 
-userSchema.methods.clearCart = function(){
-  this.cart = {items: []}
-  return this.save();
-}
+Use
 
 const UserModel = model<UserSchema>("User", userSchema);
 export default UserModel;
