@@ -12,13 +12,13 @@ export interface IUser extends Document {
   email: string;
   password: string;
   confirmPassword: string;
+  role: string;
   cart?: {
     items: {
       productId: Schema.Types.ObjectId;
       quantity: number;
     };
   }[];
-  role: string;
 }
 
 export interface IAuthUser extends Request {

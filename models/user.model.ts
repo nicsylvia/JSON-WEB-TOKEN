@@ -35,7 +35,6 @@ const userSchema: Schema<UserSchema> = new Schema(
     },
     role: {
       type: String,
-
       enum: [authRole.admin, authRole.manager, authRole.user],
       message: `Please identify your role as provided: 
       ${authRole.user}, 
@@ -108,6 +107,8 @@ userSchema.methods.addToCart = function(productID: string, Decrement: boolean){
   return this.save({validateBeforeSave: false})
 }
 
+// Methods for remove from cart
+
 userSchema.methods.removeFromCart = function(productID : string){
   const updateCart = this.cart.items.filter((item: {productID: {toString: ()=> string}}) =>{
     return item.productID.toString() !== productID.toString()
@@ -115,6 +116,8 @@ userSchema.methods.removeFromCart = function(productID : string){
   this.cart.items = updateCart
   return this.save({validateBeforeSave: false})
 }
+
+// Methods for clear cart
 
 userSchema.methods.clearCart = function(){
   this.cart = {items: []}
