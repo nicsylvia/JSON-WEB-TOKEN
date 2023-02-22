@@ -121,7 +121,7 @@ userSchema.methods.removeFromCart = function(productID : string){
 
 userSchema.methods.clearCart = function(){
   this.cart = { items: [] };
-  return this.save()
+  this.save()
 }
 
 const UserModel = model<UserSchema>("User", userSchema);
