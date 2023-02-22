@@ -109,13 +109,7 @@ userSchema.methods.addToCart = function(productID: string, Decrement: boolean){
 
 // Methods for remove from cart
 
-userSchema.methods.removeFromCart = function(productID : string){
-  const updateCart = this.cart.items.filter((item: {productID: {toString: ()=> string}}) =>{
-    return item.productID.toString() !== productID.toString()
-  })
-  this.cart.items = updateCart
-  return this.save({validateBeforeSave: false})
-}
+
 
 // Methods for clear cart
 
