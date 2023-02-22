@@ -2,6 +2,7 @@ import { Document, model, Schema } from "mongoose";
 import { ICartItem, IUser } from "../interfaces/User";
 import isEmail from "validator/lib/isEmail";
 import { authRole } from "../constants/user.constant";
+import { string } from "joi";
 
 interface UserSchema extends Document, IUser {
   clearCart(): Promise<void>;
@@ -109,7 +110,13 @@ userSchema.methods.addToCart = function(productID: string, Decrement: boolean){
 
 // Methods for remove from cart
 
-
+userSchema.methods.removeFromCart = function(productID: string){
+  const updateCart = this.cart.items.filter((item: {cartID: {toString: ()=> string}}) =>{
+    return item.cartID.toString() !== productID.toString()
+  });
+  this.cart.items = updateCart
+  this.save({validateBeforeSave: false})
+}
 
 // Methods for clear cart
 
